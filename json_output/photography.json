@@ -1,0 +1,516 @@
+{
+  "id": "photography",
+  "title": {
+    "kind": "INLINE",
+    "values": {
+      "en": "Photography",
+      "th": "หาตากล้องถ่ายรูป"
+    }
+  },
+  "packages": [
+    {
+      "id": "photography-general",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น แนวภาพที่ต้องการ"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายแบบทั่วไป / โปรไฟล์",
+          "th": "ถ่ายแบบทั่วไป / โปรไฟล์"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 1500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "เป็นการถ่ายแบบในสตูดิโอ พร้อมปรับแต่งภาพพื้นฐาน และส่งไฟล์ดิจิทัล ราคานี้ยังไม่รวมสตูดิโอ (1 ชั่วโมง)",
+          "th": "เป็นการถ่ายแบบในสตูดิโอ พร้อมปรับแต่งภาพพื้นฐาน และส่งไฟล์ดิจิทัล ราคานี้ยังไม่รวมสตูดิโอ (1 ชั่วโมง)"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-studio",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น แนวภาพที่ต้องการ"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพพรีเวดดิ้งในสตูดิโอ",
+          "th": "ถ่ายภาพพรีเวดดิ้งในสตูดิโอ"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 3500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายรูปงานพรีเวดดิ้งครึ่งวันเช้า หรือบ่าย (4 ชั่วโมง)",
+          "th": "ถ่ายรูปงานพรีเวดดิ้งครึ่งวันเช้า หรือบ่าย (4 ชั่วโมง)"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-prewedding",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น แนวภาพที่ต้องการ"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพพรีเวดดิ้งนอกสถานที่",
+          "th": "ถ่ายภาพพรีเวดดิ้งนอกสถานที่"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 4000,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายรูปงานพรีเวดดิ้งครึ่งวันเช้า หรือบ่าย (4 ชั่วโมง)",
+          "th": "ถ่ายรูปงานพรีเวดดิ้งครึ่งวันเช้า หรือบ่าย (4 ชั่วโมง)"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-wedding",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น มู้ด โทน สไตล์ของภาพที่ต้องการ"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายงานแต่งงาน",
+          "th": "ถ่ายงานแต่งงาน"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 4000,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายรูปงานแต่งงานครึ่งวันเช้า หรือบ่าย (4 ชั่วโมง)",
+          "th": "ถ่ายรูปงานแต่งงานครึ่งวันเช้า หรือบ่าย (4 ชั่วโมง)"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-graduation",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น มีเพื่อนถ่ายด้วยอีก 3 คน"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายรูปรับปริญญา",
+          "th": "ถ่ายรูปรับปริญญา"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 3500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายรูปรับปริญญาครึ่งวัน (4 ชั่วโมง)",
+          "th": "ถ่ายรูปรับปริญญาครึ่งวัน (4 ชั่วโมง)"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-event",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น เป็นงานกลางคืน"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายงานอีเวนต์ / งานองค์กร",
+          "th": "ถ่ายงานอีเวนต์ / งานองค์กร"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 1500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพเก็บบรรยากาศงานอีเวนต์ หรืองานภายในขององค์กรต่างๆ เริ่มต้นที่ 1 ชั่วโมง",
+          "th": "ถ่ายภาพเก็บบรรยากาศงานอีเวนต์ หรืองานภายในขององค์กรต่างๆ เริ่มต้นที่ 1 ชั่วโมง"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-products",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น รายละเอียดของาน, ประเภทสินค้าที่ต้องการถ่าย"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพสินค้า",
+          "th": "ถ่ายภาพสินค้า"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 1500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพสินค้าพร้อมแต่งลง social medai จำนวน 10 รูปภาพ",
+          "th": "ถ่ายภาพสินค้าพร้อมแต่งลง social medai จำนวน 10 รูปภาพ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-real-estate",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น รายละเอียดของาน"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพอสังหาริมทรัพย์ สถานที่ และร้านค้า",
+          "th": "ถ่ายภาพอสังหาริมทรัพย์ สถานที่ และร้านค้า"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 1500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพอสังหาริมทรัพย์ สถานที่ และร้านค้า เริ่มต้น 1 ชั่วโมง",
+          "th": "ถ่ายภาพอสังหาริมทรัพย์ สถานที่ และร้านค้า เริ่มต้น 1 ชั่วโมง"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "photography-real-drone",
+      "note": {
+        "placeholder": "แจ้งข้อมูลเพิ่มเติมที่ต้องการให้ผู้รับงานทราบ เช่น รายละเอียดของาน"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ถ่ายภาพมุมสูงโดยใช้โดรน",
+          "th": "ถ่ายภาพมุมสูงโดยใช้โดรน"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 1,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวน"
+          }
+        }
+      },
+      "base_price": 2500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ภาพถ่ายโดรนมุมสูง เริ่มต้น 2 ชั่วโมง",
+          "th": "ภาพถ่ายโดรนมุมสูง เริ่มต้น 2 ชั่วโมง"
+        }
+      },
+      "configurations": []
+    }
+  ],
+  "cart_limit": 1,
+  "components": {
+    "banner": {
+      "title": {
+        "key": "service_definition.components.banner.title",
+        "kind": "I18N"
+      },
+      "button": {
+        "url": "https://www.fastwork.co/join",
+        "text": {
+          "key": "service_definition.components.banner.button_text",
+          "kind": "I18N"
+        }
+      },
+      "subtitle": {
+        "key": "service_definition.components.banner.subtitle",
+        "kind": "I18N"
+      }
+    },
+    "info_badge": [
+      {
+        "icon": "refund_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.refund.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.refund.highlight_text",
+          "kind": "I18N"
+        }
+      },
+      {
+        "icon": "payment_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.payment.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.payment.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "location_box": {
+      "text": {
+        "at_pin": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "Address where the service is needed",
+              "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+            }
+          }
+        },
+        "online": {
+          "description": null,
+          "placeholder": null
+        },
+        "at_store": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "We'll help find available shops near your location",
+              "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+            }
+          }
+        }
+      },
+      "visible": true,
+      "service_location_types": [
+        "AT_PIN"
+      ],
+      "default_service_location_type": "AT_PIN"
+    },
+    "cashback_section": {
+      "icon": "point_icon",
+      "full_text": {
+        "key": "service_definition.components.cashback_section.full_text",
+        "kind": "I18N"
+      },
+      "highlight_text": {
+        "key": "service_definition.components.cashback_section.highlight_text",
+        "kind": "I18N"
+      }
+    },
+    "summary_info_badge": [
+      {
+        "icon": "check_icon",
+        "full_text": {
+          "key": "service_definition.summary_info_badge.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.summary_info_badge.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "summary_location_box": {
+      "location": {
+        "text": {
+          "at_pin": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "Address where the service is needed",
+                "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+              }
+            }
+          },
+          "online": {
+            "description": null,
+            "placeholder": null
+          },
+          "at_store": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "We'll help find available shops near your location",
+                "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+              }
+            }
+          }
+        },
+        "visible": true,
+        "service_location_types": [
+          "AT_PIN"
+        ],
+        "default_service_location_type": "AT_PIN"
+      },
+      "date_time": {
+        "visible": true,
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Select date and time for service",
+            "th": "เลือกวันที่และเวลารับบริการ"
+          }
+        }
+      }
+    }
+  },
+  "cover_image": "https://example.com/service-cover.jpg",
+  "service_location_types": [
+    "AT_PIN"
+  ]
+}

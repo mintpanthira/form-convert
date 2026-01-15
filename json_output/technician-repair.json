@@ -1,0 +1,463 @@
+{
+  "id": "technician-repair",
+  "title": {
+    "kind": "INLINE",
+    "values": {
+      "en": "Technician Repair",
+      "th": "Technician Repair"
+    }
+  },
+  "packages": [
+    {
+      "id": "technician-repair-computer",
+      "note": {
+        "placeholder": "ระบุอาการเสียเพิ่มเติม เช่น เปิดไม่ติด คอมฯร้อน"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ตรวจเช็คคอมพิวเตอร์",
+          "th": "ตรวจเช็คคอมพิวเตอร์"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 600,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "บริการโดยผู้เชี่ยวชาญ",
+          "th": "บริการโดยผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-repair-tv",
+      "note": {
+        "placeholder": "ระบุอาการเสียเพิ่มเติม เช่น ทีวีเปิดไม่ติด ภาพมีเส้น"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมทีวี",
+          "th": "ซ่อมทีวี"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 1000,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมโดยช่างผู้เชี่ยวชาญ",
+          "th": "ซ่อมโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-repair-fridge",
+      "note": {
+        "placeholder": "ระบุอาการเสียเพิ่มเติม เช่น ตู้เย็นมีเสียงดัง ช่องทำความเย็นเสีย"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมตู้เย็น",
+          "th": "ซ่อมตู้เย็น"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 1500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมโดยช่างผู้เชี่ยวชาญ",
+          "th": "ซ่อมโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-repair-washing-machine",
+      "note": {
+        "placeholder": "ระบุอาการเสียเพิ่มเติม เช่น เครื่องมีอาการสั่นผิดปกติ"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมเครื่องซักผ้า",
+          "th": "ซ่อมเครื่องซักผ้า"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 1500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมโดยช่างผู้เชี่ยวชาญ",
+          "th": "ซ่อมโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-repair-water-heater",
+      "note": {
+        "placeholder": "ระบุอาการเสียเพิ่มเติม เช่น น้ำไม่อุ่น หรือ ไฟไม่ติด"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมเครื่องทำน้ำอุ่น",
+          "th": "ซ่อมเครื่องทำน้ำอุ่น"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมโดยช่างผู้เชี่ยวชาญ",
+          "th": "ซ่อมโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-repair-microwave",
+      "note": {
+        "placeholder": "ระบุอาการเสียเพิ่มเติม เช่น เวฟแล้วไม่ร้อน, มีกลิ่นไหม้"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมไมโครเวฟ",
+          "th": "ซ่อมไมโครเวฟ"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมโดยช่างผู้เชี่ยวชาญ",
+          "th": "ซ่อมโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-repair-fan",
+      "note": {
+        "placeholder": "ระบุอาการเสียเพิ่มเติม เช่น ใบพัดไม่หมุน, มีกลิ่นไหม้"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมพัดลม",
+          "th": "ซ่อมพัดลม"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมโดยช่างผู้เชี่ยวชาญ",
+          "th": "ซ่อมโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": [
+        {
+          "id": "type",
+          "data": {
+            "items": [
+              {
+                "id": "1",
+                "value": "พัดลมตั้งโต๊ะ",
+                "additional_price": 0
+              },
+              {
+                "id": "2",
+                "value": "พัดลมเพดาน",
+                "additional_price": 400
+              }
+            ]
+          },
+          "type": "RADIO",
+          "title": "ประเภทพัดลม ",
+          "validation": {
+            "required": true
+          },
+          "description": null,
+          "default_value": null
+        }
+      ]
+    }
+  ],
+  "cart_limit": 30,
+  "components": {
+    "banner": {
+      "title": {
+        "key": "service_definition.components.banner.title",
+        "kind": "I18N"
+      },
+      "button": {
+        "url": "https://www.fastwork.co/join",
+        "text": {
+          "key": "service_definition.components.banner.button_text",
+          "kind": "I18N"
+        }
+      },
+      "subtitle": {
+        "key": "service_definition.components.banner.subtitle",
+        "kind": "I18N"
+      }
+    },
+    "info_badge": [
+      {
+        "icon": "refund_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.refund.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.refund.highlight_text",
+          "kind": "I18N"
+        }
+      },
+      {
+        "icon": "payment_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.payment.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.payment.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "location_box": {
+      "text": {
+        "at_pin": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "Address where the service is needed",
+              "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+            }
+          }
+        },
+        "online": {
+          "description": null,
+          "placeholder": null
+        },
+        "at_store": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "We'll help find available shops near your location",
+              "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+            }
+          }
+        }
+      },
+      "visible": true,
+      "service_location_types": [
+        "AT_PIN"
+      ],
+      "default_service_location_type": "AT_PIN"
+    },
+    "cashback_section": {
+      "icon": "point_icon",
+      "full_text": {
+        "key": "service_definition.components.cashback_section.full_text",
+        "kind": "I18N"
+      },
+      "highlight_text": {
+        "key": "service_definition.components.cashback_section.highlight_text",
+        "kind": "I18N"
+      }
+    },
+    "summary_info_badge": [
+      {
+        "icon": "check_icon",
+        "full_text": {
+          "key": "service_definition.summary_info_badge.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.summary_info_badge.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "summary_location_box": {
+      "location": {
+        "text": {
+          "at_pin": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "Address where the service is needed",
+                "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+              }
+            }
+          },
+          "online": {
+            "description": null,
+            "placeholder": null
+          },
+          "at_store": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "We'll help find available shops near your location",
+                "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+              }
+            }
+          }
+        },
+        "visible": true,
+        "service_location_types": [
+          "AT_PIN"
+        ],
+        "default_service_location_type": "AT_PIN"
+      },
+      "date_time": {
+        "visible": true,
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Select date and time for service",
+            "th": "เลือกวันที่และเวลารับบริการ"
+          }
+        }
+      }
+    }
+  },
+  "cover_image": "https://example.com/service-cover.jpg",
+  "service_location_types": [
+    "AT_PIN"
+  ]
+}

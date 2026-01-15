@@ -1,0 +1,399 @@
+{
+  "id": "technician-plumbing",
+  "title": {
+    "kind": "INLINE",
+    "values": {
+      "en": "Technician Plumbing",
+      "th": "Technician Plumbing"
+    }
+  },
+  "packages": [
+    {
+      "id": "technician-plumbing-system-check",
+      "note": {
+        "placeholder": "ระบุอาการเพิ่มเติมอย่างละเอียด เช่น น้ำรั่วใต้อ่างล้างจาน หรือ น้ำไม่ไหล"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ตรวจระบบน้ำ น้ำไม่ไหล น้ำรั่ว",
+          "th": "ตรวจระบบน้ำ น้ำไม่ไหล น้ำรั่ว"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนจุด"
+          }
+        }
+      },
+      "base_price": 500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ตรวจสอบโดยช่างผู้เชี่ยวชาญ",
+          "th": "ตรวจสอบโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-plumbing-fix-fix-plumbing",
+      "note": {
+        "placeholder": "ระบุข้อมูลหรือยี่ห้อเพิ่มเติม เช่น ปั๊มน้ำ Hitachi, Mitsubishi"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมปั๊มน้ำ",
+          "th": "ซ่อมปั๊มน้ำ"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนจุด"
+          }
+        }
+      },
+      "base_price": 1200,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "บริการโดยช่างผู้เชี่ยวชาญ",
+          "th": "บริการโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-plumbing-clogged-pipe",
+      "note": {
+        "placeholder": "ระบุอาการเพิ่มเติมอย่างละเอียด เช่น ท่อน้ำทิ้งตัน"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมท่อตัน",
+          "th": "ซ่อมท่อตัน"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนจุด"
+          }
+        }
+      },
+      "base_price": 500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "บริการโดยช่างผู้เชี่ยวชาญ",
+          "th": "บริการโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-plumbing-fix-broken-pipe",
+      "note": {
+        "placeholder": "ระบุอาการเพิ่มเติมอย่างละเอียด เช่น ท่อน้ำทิ้งรั่วซึ่ม หรือ ท่อน้ำแตก"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมท่อแตก/น้ำรั่ว",
+          "th": "ซ่อมท่อแตก/น้ำรั่ว"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนจุด"
+          }
+        }
+      },
+      "base_price": 1200,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "บริการโดยช่างผู้เชี่ยวชาญ",
+          "th": "บริการโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-plumbing-fix-tap",
+      "note": {
+        "placeholder": "ระบุอาการเพิ่มเติมอย่างละเอียด เช่น ก็อกน้ำอ่างล้างจานน้ำไม่ไหล หรือ ก็อกน้ำมีน้ำหยดตลอดเวลา"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ซ่อมก็อกน้ำ",
+          "th": "ซ่อมก็อกน้ำ"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนจุด"
+          }
+        }
+      },
+      "base_price": 500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "บริการโดยช่างผู้เชี่ยวชาญ",
+          "th": "บริการโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "technician-plumbing-cleaning",
+      "note": {
+        "placeholder": "ระบุข้อมูลเพิ่มเติมอย่างละเอียด เช่น ถังเก็บน้ำสแตนเลส หรือถังเก็บน้ำอยู่ใต้ดิน"
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ล้างถังเก็บน้ำ",
+          "th": "ล้างถังเก็บน้ำ"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนจุด"
+          }
+        }
+      },
+      "base_price": 500,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "บริการโดยช่างผู้เชี่ยวชาญ",
+          "th": "บริการโดยช่างผู้เชี่ยวชาญ"
+        }
+      },
+      "configurations": []
+    }
+  ],
+  "cart_limit": 30,
+  "components": {
+    "banner": {
+      "title": {
+        "key": "service_definition.components.banner.title",
+        "kind": "I18N"
+      },
+      "button": {
+        "url": "https://www.fastwork.co/join",
+        "text": {
+          "key": "service_definition.components.banner.button_text",
+          "kind": "I18N"
+        }
+      },
+      "subtitle": {
+        "key": "service_definition.components.banner.subtitle",
+        "kind": "I18N"
+      }
+    },
+    "info_badge": [
+      {
+        "icon": "refund_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.refund.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.refund.highlight_text",
+          "kind": "I18N"
+        }
+      },
+      {
+        "icon": "payment_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.payment.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.payment.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "location_box": {
+      "text": {
+        "at_pin": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "Address where the service is needed",
+              "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+            }
+          }
+        },
+        "online": {
+          "description": null,
+          "placeholder": null
+        },
+        "at_store": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "We'll help find available shops near your location",
+              "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+            }
+          }
+        }
+      },
+      "visible": true,
+      "service_location_types": [
+        "AT_PIN"
+      ],
+      "default_service_location_type": "AT_PIN"
+    },
+    "cashback_section": {
+      "icon": "point_icon",
+      "full_text": {
+        "key": "service_definition.components.cashback_section.full_text",
+        "kind": "I18N"
+      },
+      "highlight_text": {
+        "key": "service_definition.components.cashback_section.highlight_text",
+        "kind": "I18N"
+      }
+    },
+    "summary_info_badge": [
+      {
+        "icon": "check_icon",
+        "full_text": {
+          "key": "service_definition.summary_info_badge.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.summary_info_badge.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "summary_location_box": {
+      "location": {
+        "text": {
+          "at_pin": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "Address where the service is needed",
+                "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+              }
+            }
+          },
+          "online": {
+            "description": null,
+            "placeholder": null
+          },
+          "at_store": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "We'll help find available shops near your location",
+                "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+              }
+            }
+          }
+        },
+        "visible": true,
+        "service_location_types": [
+          "AT_PIN"
+        ],
+        "default_service_location_type": "AT_PIN"
+      },
+      "date_time": {
+        "visible": true,
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Select date and time for service",
+            "th": "เลือกวันที่และเวลารับบริการ"
+          }
+        }
+      }
+    }
+  },
+  "cover_image": "https://example.com/service-cover.jpg",
+  "service_location_types": [
+    "AT_PIN"
+  ]
+}

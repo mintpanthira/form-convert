@@ -1,0 +1,282 @@
+{
+  "id": "air-cleaning",
+  "title": {
+    "kind": "INLINE",
+    "values": {
+      "en": "Air cleaning",
+      "th": "บริการล้างแอร์"
+    }
+  },
+  "packages": [
+    {
+      "id": "air-cleaning-wall",
+      "note": {
+        "placeholder": "ระบุข้อมูลเพิ่มเติม เช่น ระยะติดตั้งแอร์สูงเกิน 3 เมตร และพื้นที่สามารถเข้าได้ทุกวันหรือไม่ "
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ล้างแอร์ติดผนัง",
+          "th": "ล้างแอร์ติดผนัง"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 600,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ล้างด้วยน้ำยาทำความสะอาด",
+          "th": "ล้างด้วยน้ำยาทำความสะอาด"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "air-cleaning-hanging",
+      "note": {
+        "placeholder": "ระบุข้อมูลเพิ่มเติม เช่น ระยะติดตั้งแอร์สูงเกิน 3 เมตร และพื้นที่สามารถเข้าได้ทุกวันหรือไม่ "
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ล้างแอร์แขวน หรือตั้งพื้น",
+          "th": "ล้างแอร์แขวน หรือตั้งพื้น"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 1000,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ล้างด้วยน้ำยาทำความสะอาด",
+          "th": "ล้างด้วยน้ำยาทำความสะอาด"
+        }
+      },
+      "configurations": []
+    },
+    {
+      "id": "air-cleaning-cassette",
+      "note": {
+        "placeholder": "ระบุข้อมูลเพิ่มเติม เช่น ระยะติดตั้งแอร์สูงเกิน 3 เมตร และพื้นที่สามารถเข้าได้ทุกวันหรือไม่ "
+      },
+      "image": {
+        "cover": "https://example.com/inspection-cover.jpg",
+        "thumbnail": "https://example.com/inspection-thumb.jpg"
+      },
+      "title": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ล้างแอร์ฝังฝ้า หรือสี่ทิศทาง",
+          "th": "ล้างแอร์ฝังฝ้า หรือสี่ทิศทาง"
+        }
+      },
+      "quantity": {
+        "validation": {
+          "max": 10,
+          "min": 1
+        },
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Quantity",
+            "th": "จำนวนเครื่อง"
+          }
+        }
+      },
+      "base_price": 1200,
+      "description": {
+        "kind": "INLINE",
+        "values": {
+          "en": "ล้างด้วยน้ำยาทำความสะอาด",
+          "th": "ล้างด้วยน้ำยาทำความสะอาด"
+        }
+      },
+      "configurations": []
+    }
+  ],
+  "cart_limit": 30,
+  "components": {
+    "banner": {
+      "title": {
+        "key": "service_definition.components.banner.title",
+        "kind": "I18N"
+      },
+      "button": {
+        "url": "https://www.fastwork.co/join",
+        "text": {
+          "key": "service_definition.components.banner.button_text",
+          "kind": "I18N"
+        }
+      },
+      "subtitle": {
+        "key": "service_definition.components.banner.subtitle",
+        "kind": "I18N"
+      }
+    },
+    "info_badge": [
+      {
+        "icon": "refund_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.refund.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.refund.highlight_text",
+          "kind": "I18N"
+        }
+      },
+      {
+        "icon": "payment_icon",
+        "full_text": {
+          "key": "service_definition.components.info_badge.payment.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.components.info_badge.payment.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "location_box": {
+      "text": {
+        "at_pin": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "Address where the service is needed",
+              "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+            }
+          }
+        },
+        "online": {
+          "description": null,
+          "placeholder": null
+        },
+        "at_store": {
+          "description": null,
+          "placeholder": {
+            "kind": "INLINE",
+            "values": {
+              "en": "We'll help find available shops near your location",
+              "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+            }
+          }
+        }
+      },
+      "visible": true,
+      "service_location_types": [
+        "AT_PIN"
+      ],
+      "default_service_location_type": "AT_PIN"
+    },
+    "cashback_section": {
+      "icon": "point_icon",
+      "full_text": {
+        "key": "service_definition.components.cashback_section.full_text",
+        "kind": "I18N"
+      },
+      "highlight_text": {
+        "key": "service_definition.components.cashback_section.highlight_text",
+        "kind": "I18N"
+      }
+    },
+    "summary_info_badge": [
+      {
+        "icon": "check_icon",
+        "full_text": {
+          "key": "service_definition.summary_info_badge.full_text",
+          "kind": "I18N"
+        },
+        "more_content": null,
+        "highlight_text": {
+          "key": "service_definition.summary_info_badge.highlight_text",
+          "kind": "I18N"
+        }
+      }
+    ],
+    "summary_location_box": {
+      "location": {
+        "text": {
+          "at_pin": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "Address where the service is needed",
+                "th": "คุณต้องการให้ช่างไปที่ไหน ?"
+              }
+            }
+          },
+          "online": {
+            "description": null,
+            "placeholder": null
+          },
+          "at_store": {
+            "description": null,
+            "placeholder": {
+              "kind": "INLINE",
+              "values": {
+                "en": "We'll help find available shops near your location",
+                "th": "เราจะช่วยหาร้านที่ว่าง ใกล้หมุดที่คุณปัก"
+              }
+            }
+          }
+        },
+        "visible": true,
+        "service_location_types": [
+          "AT_PIN"
+        ],
+        "default_service_location_type": "AT_PIN"
+      },
+      "date_time": {
+        "visible": true,
+        "placeholder": {
+          "kind": "INLINE",
+          "values": {
+            "en": "Select date and time for service",
+            "th": "เลือกวันที่และเวลารับบริการ"
+          }
+        }
+      }
+    }
+  },
+  "cover_image": "https://example.com/service-cover.jpg",
+  "service_location_types": [
+    "AT_PIN"
+  ]
+}
