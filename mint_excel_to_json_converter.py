@@ -425,32 +425,145 @@ if uploaded_file is not None:
                     st.warning("⚠️ **หมายเหตุ:** หากต้องการ copy JSON กรุณาใช้ปุ่ม '👁️ แสดง JSON Code เพื่อ Copy' ด้านบน เพื่อหลีกเลี่ยงปัญหา line endings")
                     st.code(json_str, language='json', line_numbers=True)
                 
-                # Preview packages
-                st.markdown("### 📦 Preview Packages")
+                # Preview packages - Mobile UI Style
+                st.markdown("### 📦 Preview Packages (Mobile UI Style)")
                 
-                for pkg in category_json['packages']:
-                    with st.expander(f"**{pkg['title']['values']['th']}** - ฿{pkg['base_price']:,}"):
-                        col1, col2 = st.columns([2, 1])
-                        
-                        with col1:
-                            st.markdown(f"**📝 คำอธิบาย:** {pkg['description']['values']['th']}")
-                            st.markdown(f"**🆔 Package ID:** `{pkg['id']}`")
-                            st.markdown(f"**📦 จำนวน:** {pkg['quantity']['validation']['min']} - {pkg['quantity']['validation']['max']} {pkg['quantity']['placeholder']['values']['th']}")
-                        
-                        with col2:
-                            st.markdown(f"**💰 ราคาเริ่มต้น**")
-                            st.markdown(f"# ฿{pkg['base_price']:,}")
-                        
-                        # Configurations
-                        if pkg['configurations']:
-                            st.markdown("**⚙️ Configurations:**")
-                            for config in pkg['configurations']:
-                                st.markdown(f"- **{config['title']}** ({config['type']})")
-                                for item in config['data']['items']:
-                                    price_text = f"+฿{item['additional_price']}" if item['additional_price'] > 0 else "ฟรี"
-                                    st.markdown(f"  - {item['value']} ({price_text})")
-                        else:
-                            st.markdown("*ไม่มี configurations*")
+                for idx, pkg in enumerate(category_json['packages']):
+                    # Package Card
+                    st.markdown(f"""
+                    <div style="
+                        background: white;
+                        border-radius: 16px;
+                        padding: 24px;
+                        margin: 16px 0;
+                        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+                        border: 1px solid #f0f0f0;
+                    ">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <h3 style="margin: 0; color: #1a1a1a; font-size: 20px;">
+                                {pkg['title']['values']['th']}
+                            </h3>
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                color: white; padding: 8px 16px; border-radius: 12px; font-weight: bold; font-size: 18px;">
+                                ฿{pkg['base_price']:,}
+                            </div>
+                        </div>
+                        <p style="color: #666; margin: 8px 0; line-height: 1.5;">
+                            {pkg['description']['values']['th']}
+                        </p>
+                        <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-top: 12px;">
+                            <span style="color: #666; font-size: 14px;">📦 จำนวน: </span>
+                            <span style="color: #333; font-weight: 500;">{pkg['quantity']['validation']['min']}-{pkg['quantity']['validation']['max']} {pkg['quantity']['placeholder']['values']['th']}</span>
+                            <span style="color: #999; margin-left: 12px; font-size: 12px;">🆔 {pkg['id']}</span>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Configurations
+                    if pkg['configurations']:
+                        for config_idx, config in enumerate(pkg['configurations']):
+                            st.markdown(f"""
+                            <div style="margin: 16px 0;">
+                                <div style="color: #333; font-weight: 600; font-size: 16px; margin-bottom: 12px;">
+                                    ⚙️ {config['title']}
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                            
+                            # Radio or Checkbox style
+                            for item_idx, item in enumerate(config['data']['items']):
+                                price_text = f"+฿{item['additional_price']}" if item['additional_price'] > 0 else ""
+                                icon = "🔘" if config['type'] == "RADIO" else "☑️"
+                                
+                                st.markdown(f"""
+                                <div style="
+                                    background: #fafafa;
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 12px;
+                                    padding: 16px;
+                                    margin: 8px 0;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    cursor: pointer;
+                                    transition: all 0.2s;
+                                ">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <span style="font-size: 20px;">{icon}</span>
+                                        <span style="color: #333; font-size: 15px;">{item['value']}</span>
+                                    </div>
+                                    {f'<div style="color: #667eea; font-weight: 600; font-size: 15px;">{price_text}</div>' if price_text else ''}
+                                </div>
+                                """, unsafe_allow_html=True)
+                    
+                    # Quantity selector (simulated)
+                    st.markdown(f"""
+                    <div style="
+                        background: white;
+                        border-radius: 12px;
+                        padding: 16px;
+                        margin: 16px 0;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        border: 1px solid #e0e0e0;
+                    ">
+                        <span style="color: #333; font-weight: 500;">จำนวนที่ต้องการ</span>
+                        <div style="display: flex; align-items: center; gap: 16px;">
+                            <button style="
+                                width: 36px;
+                                height: 36px;
+                                border-radius: 50%;
+                                border: 2px solid #e0e0e0;
+                                background: white;
+                                color: #999;
+                                font-size: 20px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            ">−</button>
+                            <span style="font-size: 18px; font-weight: 600; min-width: 30px; text-align: center;">1</span>
+                            <button style="
+                                width: 36px;
+                                height: 36px;
+                                border-radius: 50%;
+                                border: none;
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                color: white;
+                                font-size: 20px;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            ">+</button>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Order button
+                    st.markdown(f"""
+                    <div style="margin: 16px 0 32px 0;">
+                        <button style="
+                            width: 100%;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            border: none;
+                            border-radius: 12px;
+                            padding: 16px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                        ">
+                            🛒 สั่งซื้อเลย ฿{pkg['base_price']:,}
+                        </button>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Separator
+                    if idx < len(category_json['packages']) - 1:
+                        st.markdown("<hr style='margin: 32px 0; border: none; border-top: 1px solid #e0e0e0;'>", unsafe_allow_html=True)
     
     except Exception as e:
         st.error(f"❌ เกิดข้อผิดพลาด: {str(e)}")
