@@ -425,145 +425,202 @@ if uploaded_file is not None:
                     st.warning("⚠️ **หมายเหตุ:** หากต้องการ copy JSON กรุณาใช้ปุ่ม '👁️ แสดง JSON Code เพื่อ Copy' ด้านบน เพื่อหลีกเลี่ยงปัญหา line endings")
                     st.code(json_str, language='json', line_numbers=True)
                 
-                # Preview packages - Mobile UI Style
-                st.markdown("### 📦 Preview Packages (Mobile UI Style)")
+                # Preview packages - Mobile Mockup
+                st.markdown("### 📱 Preview Packages (Mobile Demo)")
                 
-                for idx, pkg in enumerate(category_json['packages']):
-                    # Package Card
-                    st.markdown(f"""
+                # Create mobile frame container
+                col_left, col_mobile, col_right = st.columns([1, 2, 1])
+                
+                with col_mobile:
+                    # Mobile frame header
+                    st.markdown("""
                     <div style="
-                        background: white;
-                        border-radius: 16px;
-                        padding: 24px;
-                        margin: 16px 0;
-                        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-                        border: 1px solid #f0f0f0;
+                        max-width: 400px;
+                        margin: 0 auto;
+                        background: #1a1a1a;
+                        border-radius: 36px;
+                        padding: 12px;
+                        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
                     ">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                            <h3 style="margin: 0; color: #1a1a1a; font-size: 20px;">
-                                {pkg['title']['values']['th']}
-                            </h3>
-                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                                color: white; padding: 8px 16px; border-radius: 12px; font-weight: bold; font-size: 18px;">
-                                ฿{pkg['base_price']:,}
+                        <!-- Status Bar -->
+                        <div style="
+                            background: white;
+                            border-radius: 28px 28px 0 0;
+                            padding: 12px 24px 8px 24px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 12px;
+                        ">
+                            <div style="font-weight: 600;">9:41</div>
+                            <div style="display: flex; gap: 4px;">
+                                <span>📶</span>
+                                <span>📡</span>
+                                <span>🔋</span>
                             </div>
                         </div>
-                        <p style="color: #666; margin: 8px 0; line-height: 1.5;">
-                            {pkg['description']['values']['th']}
-                        </p>
-                        <div style="background: #f8f9fa; padding: 12px; border-radius: 8px; margin-top: 12px;">
-                            <span style="color: #666; font-size: 14px;">📦 จำนวน: </span>
-                            <span style="color: #333; font-weight: 500;">{pkg['quantity']['validation']['min']}-{pkg['quantity']['validation']['max']} {pkg['quantity']['placeholder']['values']['th']}</span>
-                            <span style="color: #999; margin-left: 12px; font-size: 12px;">🆔 {pkg['id']}</span>
-                        </div>
-                    </div>
+                        
+                        <!-- Phone Content Area -->
+                        <div style="
+                            background: #f5f5f5;
+                            height: 600px;
+                            overflow-y: auto;
+                            padding: 16px;
+                        ">
                     """, unsafe_allow_html=True)
+                
+                    # Show first 2 packages as demo
+                    demo_packages = category_json['packages'][:2]
                     
-                    # Configurations
-                    if pkg['configurations']:
-                        for config_idx, config in enumerate(pkg['configurations']):
-                            st.markdown(f"""
-                            <div style="margin: 16px 0;">
-                                <div style="color: #333; font-weight: 600; font-size: 16px; margin-bottom: 12px;">
-                                    ⚙️ {config['title']}
-                                </div>
-                            </div>
-                            """, unsafe_allow_html=True)
-                            
-                            # Radio or Checkbox style
-                            for item_idx, item in enumerate(config['data']['items']):
-                                price_text = f"+฿{item['additional_price']}" if item['additional_price'] > 0 else ""
-                                icon = "🔘" if config['type'] == "RADIO" else "☑️"
-                                
-                                st.markdown(f"""
-                                <div style="
-                                    background: #fafafa;
-                                    border: 2px solid #e0e0e0;
-                                    border-radius: 12px;
-                                    padding: 16px;
-                                    margin: 8px 0;
-                                    display: flex;
-                                    justify-content: space-between;
-                                    align-items: center;
-                                    cursor: pointer;
-                                    transition: all 0.2s;
-                                ">
-                                    <div style="display: flex; align-items: center; gap: 12px;">
-                                        <span style="font-size: 20px;">{icon}</span>
-                                        <span style="color: #333; font-size: 15px;">{item['value']}</span>
-                                    </div>
-                                    {f'<div style="color: #667eea; font-weight: 600; font-size: 15px;">{price_text}</div>' if price_text else ''}
-                                </div>
-                                """, unsafe_allow_html=True)
-                    
-                    # Quantity selector (simulated)
-                    st.markdown(f"""
-                    <div style="
-                        background: white;
-                        border-radius: 12px;
-                        padding: 16px;
-                        margin: 16px 0;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        border: 1px solid #e0e0e0;
-                    ">
-                        <span style="color: #333; font-weight: 500;">จำนวนที่ต้องการ</span>
-                        <div style="display: flex; align-items: center; gap: 16px;">
-                            <button style="
-                                width: 36px;
-                                height: 36px;
-                                border-radius: 50%;
-                                border: 2px solid #e0e0e0;
-                                background: white;
-                                color: #999;
-                                font-size: 20px;
-                                cursor: pointer;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            ">−</button>
-                            <span style="font-size: 18px; font-weight: 600; min-width: 30px; text-align: center;">1</span>
-                            <button style="
-                                width: 36px;
-                                height: 36px;
-                                border-radius: 50%;
-                                border: none;
-                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                                color: white;
-                                font-size: 20px;
-                                cursor: pointer;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                            ">+</button>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    
-                    # Order button
-                    st.markdown(f"""
-                    <div style="margin: 16px 0 32px 0;">
-                        <button style="
-                            width: 100%;
-                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                            color: white;
-                            border: none;
+                    for idx, pkg in enumerate(demo_packages):
+                        # Package Card (Mobile Size)
+                        st.markdown(f"""
+                        <div style="
+                            background: white;
                             border-radius: 12px;
                             padding: 16px;
-                            font-size: 16px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+                            margin: 12px 0;
+                            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
                         ">
-                            🛒 สั่งซื้อเลย ฿{pkg['base_price']:,}
-                        </button>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <div style="font-weight: 600; color: #1a1a1a; font-size: 15px;">
+                                    {pkg['title']['values']['th']}
+                                </div>
+                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                                    color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 14px;">
+                                    ฿{pkg['base_price']:,}
+                                </div>
+                            </div>
+                            <p style="color: #666; margin: 6px 0; line-height: 1.4; font-size: 13px;">
+                                {pkg['description']['values']['th'][:80]}{'...' if len(pkg['description']['values']['th']) > 80 else ''}
+                            </p>
+                            <div style="background: #f8f9fa; padding: 8px; border-radius: 6px; margin-top: 8px; font-size: 12px;">
+                                <span style="color: #666;">📦 {pkg['quantity']['validation']['min']}-{pkg['quantity']['validation']['max']} {pkg['quantity']['placeholder']['values']['th']}</span>
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Configurations (Mobile Size)
+                        if pkg['configurations']:
+                            for config in pkg['configurations']:
+                                st.markdown(f"""
+                                <div style="margin: 10px 0;">
+                                    <div style="color: #333; font-weight: 600; font-size: 13px; margin-bottom: 8px;">
+                                        ⚙️ {config['title']}
+                                    </div>
+                                </div>
+                                """, unsafe_allow_html=True)
+                                
+                                # Show max 3 options
+                                for item in config['data']['items'][:3]:
+                                    price_text = f"+฿{item['additional_price']}" if item['additional_price'] > 0 else ""
+                                    icon = "○" if config['type'] == "RADIO" else "☐"
+                                    
+                                    st.markdown(f"""
+                                    <div style="
+                                        background: white;
+                                        border: 1.5px solid #e0e0e0;
+                                        border-radius: 8px;
+                                        padding: 10px 12px;
+                                        margin: 6px 0;
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+                                        font-size: 13px;
+                                    ">
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 14px;">{icon}</span>
+                                            <span style="color: #333;">{item['value'][:30]}{'...' if len(item['value']) > 30 else ''}</span>
+                                        </div>
+                                        {f'<div style="color: #667eea; font-weight: 600; font-size: 12px;">{price_text}</div>' if price_text else ''}
+                                    </div>
+                                    """, unsafe_allow_html=True)
+                        
+                        # Quantity selector (Mobile Size)
+                        st.markdown(f"""
+                        <div style="
+                            background: white;
+                            border-radius: 8px;
+                            padding: 12px;
+                            margin: 12px 0;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            font-size: 13px;
+                        ">
+                            <span style="color: #333; font-weight: 500;">จำนวน</span>
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <button style="
+                                    width: 28px;
+                                    height: 28px;
+                                    border-radius: 50%;
+                                    border: 1.5px solid #e0e0e0;
+                                    background: white;
+                                    color: #999;
+                                    font-size: 16px;
+                                ">−</button>
+                                <span style="font-size: 15px; font-weight: 600; min-width: 24px; text-align: center;">1</span>
+                                <button style="
+                                    width: 28px;
+                                    height: 28px;
+                                    border-radius: 50%;
+                                    border: none;
+                                    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                    color: white;
+                                    font-size: 16px;
+                                ">+</button>
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Order button (Mobile Size)
+                        st.markdown(f"""
+                        <div style="margin: 12px 0;">
+                            <button style="
+                                width: 100%;
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                color: white;
+                                border: none;
+                                border-radius: 10px;
+                                padding: 12px;
+                                font-size: 14px;
+                                font-weight: 600;
+                                box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+                            ">
+                                🛒 สั่งซื้อ ฿{pkg['base_price']:,}
+                            </button>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        # Separator
+                        if idx < len(demo_packages) - 1:
+                            st.markdown("<hr style='margin: 16px 0; border: none; border-top: 1px solid #e0e0e0;'>", unsafe_allow_html=True)
+                    
+                    # Close mobile frame
+                    st.markdown("""
+                        </div> <!-- Close content area -->
+                        
+                        <!-- Home Indicator -->
+                        <div style="
+                            background: white;
+                            border-radius: 0 0 28px 28px;
+                            padding: 12px;
+                            display: flex;
+                            justify-content: center;
+                        ">
+                            <div style="
+                                width: 140px;
+                                height: 4px;
+                                background: #ddd;
+                                border-radius: 2px;
+                            "></div>
+                        </div>
+                    </div> <!-- Close phone frame -->
+                    
+                    <div style="text-align: center; margin-top: 16px; color: #666; font-size: 13px;">
+                        📱 แสดง {len(demo_packages)} จาก {len(category_json['packages'])} packages
                     </div>
                     """, unsafe_allow_html=True)
-                    
-                    # Separator
-                    if idx < len(category_json['packages']) - 1:
-                        st.markdown("<hr style='margin: 32px 0; border: none; border-top: 1px solid #e0e0e0;'>", unsafe_allow_html=True)
     
     except Exception as e:
         st.error(f"❌ เกิดข้อผิดพลาด: {str(e)}")
