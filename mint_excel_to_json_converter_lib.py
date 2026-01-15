@@ -72,10 +72,18 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
     - Category, Subcat thai, Category slug, Cart limit
     - Package Name, Package Id, Package Description
     - Starting price, min, max, quantity.placeholder
-    - Configurations.title, Package Detail selection ( Configuration )
-    - Configurations.id, Configurations.type
+    - Configurations.title, Package Detail selection ( Configuration ), Configurations.id, Configurations.type
+    - Configurations.title.2, Package Detail selection ( Configuration ).2, Configurations.id.2, Configurations.type.2
+    - Configurations.title.3, Package Detail selection ( Configuration ).3, Configurations.id.3, Configurations.type.3
+    - (Support up to 5 configurations per package)
     - other text field - placeholder
     - service_location_types, Location type, marketplace subcategory
+    
+    Configuration Types:
+    - NONE = no configuration (configurations: [])
+    - RADIO = radio buttons (single select)
+    - CHECKBOX = checkboxes (multiple select)
+    - DATE_TIME_RANGE = date/time range picker
     """
     
     # Set headers from first row
@@ -150,55 +158,48 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
             "configurations": []
         }
         
-        # Process configurations
-        config_type = str(row.get('Configurations.type', 'NONE')).strip().upper()
-        config_text = row.get('Package Detail selection ( Configuration )')
-        config_title = str(row.get('Configurations.title', 'ตัวเลือก'))
-        config_id = row.get('Configurations.id', 'config-001')
+        # Process multiple configurations (support .2, .3, etc.)
+        # Try to find all configuration columns
+        config_suffixes = ['', '.2', '.3', '.4', '.5']  # Support up to 5 configurations
         
-        # Check for special-request
-        is_special_request = False
-        if pd.notna(config_title):
-            config_title_lower = config_title.lower()
-            if 'special-request' in config_title_lower or 'คำขอพิเศษ' in config_title_lower or 'special request' in config_title_lower:
-                is_special_request = True
-                config_type = 'CHECKBOX'
-        
-        if config_type not in ['NONE', 'NAN'] and config_type:
-            # For special-request, create empty items for text input
-            if is_special_request:
-                config = {
-                    "id": str(config_id) if pd.notna(config_id) else "special-request",
-                    "data": {
-                        "items": []  # Empty for text input
-                    },
-                    "type": "CHECKBOX",
-                    "title": config_title,
-                    "validation": {
-                        "required": False
-                    },
-                    "description": None,
-                    "default_value": None
-                }
-                package["configurations"].append(config)
-            elif pd.notna(config_text):
+        for suffix in config_suffixes:
+            config_type_col = f'Configurations.type{suffix}'
+            config_text_col = f'Package Detail selection ( Configuration ){suffix}'
+            config_title_col = f'Configurations.title{suffix}'
+            config_id_col = f'Configurations.id{suffix}'
+            
+            # Get values
+            config_type = str(row.get(config_type_col, 'NONE')).strip().upper()
+            
+            # Skip if NONE or NAN or empty
+            if config_type in ['NONE', 'NAN', ''] or pd.isna(row.get(config_type_col)):
+                continue
+            
+            config_text = row.get(config_text_col)
+            config_title = str(row.get(config_title_col, 'ตัวเลือก')) if pd.notna(row.get(config_title_col)) else 'ตัวเลือก'
+            config_id = str(row.get(config_id_col, f'config-{len(package["configurations"])+1:03d}')) if pd.notna(row.get(config_id_col)) else f'config-{len(package["configurations"])+1:03d}'
+            
+            # Parse items from config_text
+            items = []
+            if pd.notna(config_text):
                 items = parse_configuration_text(config_text)
-                
-                if items:  # Only add if there are items
-                    config = {
-                        "id": str(config_id) if pd.notna(config_id) else "config-001",
-                        "data": {
-                            "items": items
-                        },
-                        "type": config_type,
-                        "title": config_title,
-                        "validation": {
-                            "required": config_type == "RADIO"  # RADIO usually required
-                        },
-                        "description": None,
-                        "default_value": None
-                    }
-                    package["configurations"].append(config)
+            
+            # Create configuration
+            config = {
+                "id": config_id,
+                "data": {
+                    "items": items
+                },
+                "type": config_type,
+                "title": config_title,
+                "validation": {
+                    "required": config_type == "RADIO"  # RADIO usually required
+                },
+                "description": None,
+                "default_value": None
+            }
+            
+            package["configurations"].append(config)
         
         packages.append(package)
     
