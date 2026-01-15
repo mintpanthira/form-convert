@@ -98,11 +98,26 @@ def split_by_category(df):
     results = {}
     
     for category_slug in categories:
-        # Filter data for this category
-        category_data = df_data[
-            (df_data['Category slug'] == category_slug) | 
-            (df_data['Package Id'].str.startswith(category_slug, na=False))
-        ]
+        # Filter data for this category - include main rows and following empty Package Name rows
+        mask = (df_data['Category slug'] == category_slug) | (df_data['Package Id'].str.startswith(category_slug, na=False))
+        
+        # Also include rows where Package Name is empty (additional configurations)
+        # by looking at previous row
+        indices_to_include = set()
+        for idx in df_data[mask].index:
+            indices_to_include.add(idx)
+            # Check next row
+            next_idx = idx + 1
+            while next_idx in df_data.index:
+                next_row = df_data.loc[next_idx]
+                # If Package Name is empty, include this row
+                if pd.isna(next_row.get('Package Name')) or not str(next_row.get('Package Name', '')).strip():
+                    indices_to_include.add(next_idx)
+                    next_idx += 1
+                else:
+                    break
+        
+        category_data = df_data.loc[sorted(indices_to_include)]
         
         if category_data.empty:
             continue
@@ -132,7 +147,7 @@ def split_by_category(df):
         packages = []
         current_package = None
         
-        for _, row in category_data.iterrows():
+        for idx, row in category_data.iterrows():
             # Check if this is a new package (has Package Name)
             has_package_name = pd.notna(row.get('Package Name')) and str(row.get('Package Name')).strip()
             
