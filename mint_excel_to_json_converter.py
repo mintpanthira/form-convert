@@ -92,14 +92,17 @@ def split_by_category(df):
     df_data.columns = headers
     df_data.columns = df_data.columns.str.strip()
     
+    # Forward fill Category slug for rows that don't have it (inherit from previous row)
+    df_data['Category slug filled'] = df_data['Category slug'].ffill()
+    
     # Get unique categories
-    categories = df_data[df_data['Category slug'].notna()]['Category slug'].unique()
+    categories = df_data[df_data['Category slug filled'].notna()]['Category slug filled'].unique()
     
     results = {}
     
     for category_slug in categories:
-        # Filter data for this category - include main rows and following empty Package Name rows
-        mask = (df_data['Category slug'] == category_slug) | (df_data['Package Id'].str.startswith(category_slug, na=False))
+        # Filter data for this category using filled category slug
+        mask = (df_data['Category slug filled'] == category_slug)
         
         # Also include rows where Package Name is empty (additional configurations)
         # by looking at previous row
@@ -205,8 +208,24 @@ def split_by_category(df):
                 
                 if config_type not in ['NONE', 'NAN', ''] and not pd.isna(row.get('Configurations.type')):
                     config_text = row.get('Package Detail selection ( Configuration )')
-                    config_title = row.get('Configurations.title', 'ตัวเลือก')
+                    config_title_raw = row.get('Configurations.title')
                     config_id = row.get('Configurations.id', f'config-{len(current_package["configurations"])+1:03d}')
+                    
+                    # Smart title detection
+                    if pd.notna(config_title_raw) and str(config_title_raw).lower() not in ['nan', '']:
+                        config_title = str(config_title_raw)
+                    elif pd.notna(config_text):
+                        # Try to get title from first line of config_text
+                        first_line = str(config_text).split('\n')[0].strip()
+                        # Remove price info if exists
+                        if ':' in first_line and any(c.isdigit() for c in first_line):
+                            config_title = first_line.split(':')[0].strip()
+                        else:
+                            config_title = first_line if len(first_line) < 50 else str(config_id) if pd.notna(config_id) else "ตัวเลือก"
+                    elif pd.notna(config_id):
+                        config_title = str(config_id)
+                    else:
+                        config_title = "ตัวเลือก"
                     
                     if pd.notna(config_text):
                         items = parse_configuration_text(config_text)
@@ -218,7 +237,7 @@ def split_by_category(df):
                                     "items": items
                                 },
                                 "type": config_type,
-                                "title": str(config_title) if pd.notna(config_title) else "ตัวเลือก",
+                                "title": config_title,
                                 "validation": {
                                     "required": config_type == "RADIO"
                                 },
@@ -480,7 +499,9 @@ if uploaded_file is not None:
                     for idx, pkg in enumerate(demo_packages):
                         # Package Card
                         desc_short = pkg['description']['values']['th'][:80] + ('...' if len(pkg['description']['values']['th']) > 80 else '')
-                        mobile_html += f'<div style="background: white; border-radius: 12px; padding: 16px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;"><div style="font-weight: 600; color: #1a1a1a; font-size: 15px;">{pkg["title"]["values"]["th"]}</div><div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 14px;">฿{pkg["base_price"]:,}</div></div><p style="color: #666; margin: 6px 0; line-height: 1.4; font-size: 13px;">{desc_short}</p><div style="background: #f8f9fa; padding: 8px; border-radius: 6px; margin-top: 8px; font-size: 12px;"><span style="color: #666;">📦 {pkg["quantity"]["validation"]["min"]}-{pkg["quantity"]["validation"]["max"]} {pkg["quantity"]["placeholder"]["values"]["th"]}</span></div></div>'
+                        note_placeholder = pkg.get('note', {}).get('placeholder', '')
+                        note_html = f'<div style="background: #fff3e0; border-left: 3px solid #ff9800; padding: 6px 10px; margin: 6px 0 10px 0; border-radius: 4px; font-size: 11px;"><span style="color: #e65100;">💬</span> <span style="color: #757575; font-style: italic;">{note_placeholder}</span></div>' if note_placeholder else ''
+                        mobile_html += f'<div style="background: white; border-radius: 12px; padding: 16px; margin: 12px 0; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;"><div style="font-weight: 600; color: #1a1a1a; font-size: 15px;">{pkg["title"]["values"]["th"]}</div><div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 14px;">฿{pkg["base_price"]:,}</div></div>{note_html}<p style="color: #666; margin: 6px 0; line-height: 1.4; font-size: 13px;">{desc_short}</p><div style="background: #f8f9fa; padding: 8px; border-radius: 6px; margin-top: 8px; font-size: 12px;"><span style="color: #666;">📦 {pkg["quantity"]["validation"]["min"]}-{pkg["quantity"]["validation"]["max"]} {pkg["quantity"]["placeholder"]["values"]["th"]}</span></div></div>'
                         
                         # Configurations
                         if pkg['configurations']:
@@ -495,7 +516,8 @@ if uploaded_file is not None:
                                     mobile_html += f'<div style="background: white; border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 10px 12px; margin: 6px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px;"><div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 14px;">{icon}</span><span style="color: #333;">{item_value}</span></div>{price_html}</div>'
                         
                         # Quantity & Order Button
-                        mobile_html += f'<div style="background: white; border-radius: 8px; padding: 12px; margin: 12px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px;"><span style="color: #333; font-weight: 500;">จำนวน</span><div style="display: flex; align-items: center; gap: 12px;"><button style="width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid #e0e0e0; background: white; color: #999; font-size: 16px;">−</button><span style="font-size: 15px; font-weight: 600; min-width: 24px; text-align: center;">1</span><button style="width: 28px; height: 28px; border-radius: 50%; border: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 16px;">+</button></div></div>'
+                        quantity_label = pkg["quantity"]["placeholder"]["values"]["th"]
+                        mobile_html += f'<div style="background: white; border-radius: 8px; padding: 12px; margin: 12px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px;"><span style="color: #333; font-weight: 500;">{quantity_label}</span><div style="display: flex; align-items: center; gap: 12px;"><button style="width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid #e0e0e0; background: white; color: #999; font-size: 16px;">−</button><span style="font-size: 15px; font-weight: 600; min-width: 24px; text-align: center;">1</span><button style="width: 28px; height: 28px; border-radius: 50%; border: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 16px;">+</button></div></div>'
                         mobile_html += f'<div style="margin: 12px 0;"><button style="width: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; padding: 12px; font-size: 14px; font-weight: 600; box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);">🛒 สั่งซื้อ ฿{pkg["base_price"]:,}</button></div>'
                         
                         if idx < len(demo_packages) - 1:

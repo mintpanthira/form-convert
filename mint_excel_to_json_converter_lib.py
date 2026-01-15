@@ -179,8 +179,24 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
             # Skip if NONE or NAN or empty
             if config_type not in ['NONE', 'NAN', ''] and not pd.isna(row.get('Configurations.type')):
                 config_text = row.get('Package Detail selection ( Configuration )')
-                config_title = str(row.get('Configurations.title', 'ตัวเลือก')) if pd.notna(row.get('Configurations.title')) else 'ตัวเลือก'
+                config_title_raw = row.get('Configurations.title')
                 config_id = str(row.get('Configurations.id', f'config-{len(current_package["configurations"])+1:03d}')) if pd.notna(row.get('Configurations.id')) else f'config-{len(current_package["configurations"])+1:03d}'
+                
+                # Smart title detection
+                if pd.notna(config_title_raw) and str(config_title_raw).lower() not in ['nan', '']:
+                    config_title = str(config_title_raw)
+                elif pd.notna(config_text):
+                    # Try to get title from first line of config_text
+                    first_line = str(config_text).split('\n')[0].strip()
+                    # Remove price info if exists
+                    if ':' in first_line and any(c.isdigit() for c in first_line):
+                        config_title = first_line.split(':')[0].strip()
+                    else:
+                        config_title = first_line if len(first_line) < 50 else config_id
+                elif pd.notna(config_id):
+                    config_title = config_id
+                else:
+                    config_title = "ตัวเลือก"
                 
                 # Parse items from config_text
                 items = []
