@@ -18,8 +18,9 @@ build/
 *.swo
 *~
 
-# Streamlit
-.streamlit/
+# Streamlit (keep config for deployment, ignore secrets)
+.streamlit/secrets.toml
+.streamlit/credentials.toml
 
 # Test outputs
 test_output.json
