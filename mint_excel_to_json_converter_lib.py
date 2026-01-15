@@ -45,13 +45,15 @@ def parse_configuration_text(config_text: str) -> List[Dict]:
         # Remove leading dash
         line = line.lstrip('- ').strip()
         
-        # Extract price if exists (e.g., "+250 THB")
-        price_match = re.search(r'\+(\d+)\s*THB', line, re.IGNORECASE)
+        # Extract price if exists (e.g., "+250 THB" or "+1,000 THB")
+        price_match = re.search(r'\+([\d,]+)\s*THB', line, re.IGNORECASE)
         additional_price = 0
         if price_match:
-            additional_price = int(price_match.group(1))
+            # Remove comma from price string
+            price_str = price_match.group(1).replace(',', '')
+            additional_price = int(price_str)
             # Remove price from value text
-            line = re.sub(r'\+\d+\s*THB', '', line, flags=re.IGNORECASE).strip()
+            line = re.sub(r'\+[\d,]+\s*THB', '', line, flags=re.IGNORECASE).strip()
         
         items.append({
             "id": str(item_id),
@@ -96,7 +98,7 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
     
     # Get service metadata from first package
     first_package = df_data[df_data['Package Name'].notna()].iloc[0]
-    cart_limit = int(first_package.get('Cart limit', 10)) if pd.notna(first_package.get('Cart limit')) else 10
+    cart_limit = int(str(first_package.get('Cart limit', 10)).replace(',', '')) if pd.notna(first_package.get('Cart limit')) and str(first_package.get('Cart limit', 10)).replace(',', '').isdigit() else 10
     category = first_package.get('Category', 'Service')
     subcat_thai = first_package.get('Subcat thai', '')
     
@@ -146,17 +148,17 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
                     "thumbnail": "https://example.com/inspection-thumb.jpg"
                 },
                 "title": create_inline_text(package_name, package_name),
-                "quantity": {
-                    "validation": {
-                        "max": int(row.get('max', 10)) if pd.notna(row.get('max')) else 10,
-                        "min": int(row.get('min', 1)) if pd.notna(row.get('min')) else 1
-                    },
+            "quantity": {
+                "validation": {
+                    "max": int(str(row.get('max', 10)).replace(',', '')) if pd.notna(row.get('max')) and str(row.get('max', 10)).replace(',', '').replace('.', '').isdigit() else 10,
+                    "min": int(str(row.get('min', 1)).replace(',', '')) if pd.notna(row.get('min')) and str(row.get('min', 1)).replace(',', '').replace('.', '').isdigit() else 1
+                },
                     "placeholder": create_inline_text(
                         str(row.get('quantity.placeholder', 'จำนวน')),
                         "Quantity"
                     )
                 },
-                "base_price": int(row.get('Starting price', 0)) if pd.notna(row.get('Starting price')) else 0,
+                "base_price": int(str(row.get('Starting price', 0)).replace(',', '')) if pd.notna(row.get('Starting price')) and str(row.get('Starting price', 0)).replace(',', '').isdigit() else 0,
                 "description": create_inline_text(
                     str(row.get('Package Description', '')),
                     str(row.get('Package Description', ''))
