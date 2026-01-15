@@ -130,80 +130,91 @@ def split_by_category(df):
         
         # Build packages
         packages = []
+        current_package = None
+        
         for _, row in category_data.iterrows():
-            if pd.isna(row.get('Package Name')):
-                continue
+            # Check if this is a new package (has Package Name)
+            has_package_name = pd.notna(row.get('Package Name')) and str(row.get('Package Name')).strip()
             
-            package_name = str(row['Package Name']).strip()
-            package_id = str(row['Package Id']).strip()
-            
-            if not package_name or not package_id:
-                continue
-            
-            # Get location types
-            location_types_str = str(row.get('service_location_types', 'AT_PIN'))
-            service_location_types = []
-            if pd.notna(location_types_str) and location_types_str != 'nan':
-                service_location_types = [loc.strip() for loc in location_types_str.split(',')]
-            if not service_location_types:
-                service_location_types = ['AT_PIN']
-            
-            package = {
-                "id": package_id,
-                "note": {
-                    "placeholder": str(row.get('other text field - placeholder', 'ระบุข้อมูลเพิ่มเติม'))
-                },
-                "image": {
-                    "cover": "https://example.com/inspection-cover.jpg",
-                    "thumbnail": "https://example.com/inspection-thumb.jpg"
-                },
-                "title": create_inline_text(package_name, package_name),
-                "quantity": {
-                    "validation": {
-                        "max": int(row.get('max', 10)) if pd.notna(row.get('max')) else 10,
-                        "min": int(row.get('min', 1)) if pd.notna(row.get('min')) else 1
-                    },
-                    "placeholder": create_inline_text(
-                        str(row.get('quantity.placeholder', 'จำนวน')),
-                        "Quantity"
-                    )
-                },
-                "base_price": int(row.get('Starting price', 0)) if pd.notna(row.get('Starting price')) else 0,
-                "description": create_inline_text(
-                    str(row.get('Package Description', '')),
-                    str(row.get('Package Description', ''))
-                ),
-                "configurations": []
-            }
-            
-            # Process configurations
-            config_type = str(row.get('Configurations.type', 'NONE')).strip().upper()
-            
-            if config_type not in ['NONE', 'NAN'] and config_type:
-                config_text = row.get('Package Detail selection ( Configuration )')
-                config_title = row.get('Configurations.title', 'ตัวเลือก')
-                config_id = row.get('Configurations.id', 'config-001')
+            if has_package_name:
+                # Save previous package if exists
+                if current_package:
+                    packages.append(current_package)
                 
-                if pd.notna(config_text):
-                    items = parse_configuration_text(config_text)
-                    
-                    if items:
-                        config = {
-                            "id": str(config_id) if pd.notna(config_id) else "config-001",
-                            "data": {
-                                "items": items
-                            },
-                            "type": config_type,
-                            "title": str(config_title) if pd.notna(config_title) else "ตัวเลือก",
-                            "validation": {
-                                "required": config_type == "RADIO"
-                            },
-                            "description": None,
-                            "default_value": None
-                        }
-                        package["configurations"].append(config)
+                # Start new package
+                package_name = str(row['Package Name']).strip()
+                package_id = str(row['Package Id']).strip()
+                
+                if not package_name or not package_id:
+                    continue
             
-            packages.append(package)
+                # Get location types
+                location_types_str = str(row.get('service_location_types', 'AT_PIN'))
+                service_location_types = []
+                if pd.notna(location_types_str) and location_types_str != 'nan':
+                    service_location_types = [loc.strip() for loc in location_types_str.split(',')]
+                if not service_location_types:
+                    service_location_types = ['AT_PIN']
+                
+                current_package = {
+                    "id": package_id,
+                    "note": {
+                        "placeholder": str(row.get('other text field - placeholder', 'ระบุข้อมูลเพิ่มเติม'))
+                    },
+                    "image": {
+                        "cover": "https://example.com/inspection-cover.jpg",
+                        "thumbnail": "https://example.com/inspection-thumb.jpg"
+                    },
+                    "title": create_inline_text(package_name, package_name),
+                    "quantity": {
+                        "validation": {
+                            "max": int(row.get('max', 10)) if pd.notna(row.get('max')) else 10,
+                            "min": int(row.get('min', 1)) if pd.notna(row.get('min')) else 1
+                        },
+                        "placeholder": create_inline_text(
+                            str(row.get('quantity.placeholder', 'จำนวน')),
+                            "Quantity"
+                        )
+                    },
+                    "base_price": int(row.get('Starting price', 0)) if pd.notna(row.get('Starting price')) else 0,
+                    "description": create_inline_text(
+                        str(row.get('Package Description', '')),
+                        str(row.get('Package Description', ''))
+                    ),
+                    "configurations": []
+                }
+            
+            # Process configuration (for both new package and additional config rows)
+            if current_package:
+                config_type = str(row.get('Configurations.type', 'NONE')).strip().upper()
+                
+                if config_type not in ['NONE', 'NAN', ''] and not pd.isna(row.get('Configurations.type')):
+                    config_text = row.get('Package Detail selection ( Configuration )')
+                    config_title = row.get('Configurations.title', 'ตัวเลือก')
+                    config_id = row.get('Configurations.id', f'config-{len(current_package["configurations"])+1:03d}')
+                    
+                    if pd.notna(config_text):
+                        items = parse_configuration_text(config_text)
+                        
+                        if items:
+                            config = {
+                                "id": str(config_id) if pd.notna(config_id) else f'config-{len(current_package["configurations"])+1:03d}',
+                                "data": {
+                                    "items": items
+                                },
+                                "type": config_type,
+                                "title": str(config_title) if pd.notna(config_title) else "ตัวเลือก",
+                                "validation": {
+                                    "required": config_type == "RADIO"
+                                },
+                                "description": None,
+                                "default_value": None
+                            }
+                            current_package["configurations"].append(config)
+        
+        # Don't forget to add the last package
+        if current_package:
+            packages.append(current_package)
         
         # Build JSON for this category
         category_json = {
