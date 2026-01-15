@@ -69,9 +69,32 @@
 
 ### Configuration Types
 
-- `RADIO` - เลือกได้ 1 อย่าง (ปกติจะเป็น required)
-- `CHECKBOX` - เลือกได้หลายอย่าง
-- `NONE` - ไม่มี configuration
+- `NONE` - ไม่มี configuration (`configurations: []`)
+- `RADIO` - เลือกได้ 1 อย่าง (single select)
+- `CHECKBOX` - เลือกได้หลายอย่าง (multiple select)
+- `DATE_TIME_RANGE` - เลือกช่วงวันที่และเวลา
+
+### Multiple Configurations
+
+**1 package สามารถมีหลาย configurations ได้** (สูงสุด 5 configurations)
+
+ใช้ suffix `.2`, `.3`, `.4`, `.5` สำหรับ configuration เพิ่มเติม:
+
+**Configuration 1:**
+- `Configurations.title`
+- `Configurations.type`
+- `Configurations.id`
+- `Package Detail selection ( Configuration )`
+
+**Configuration 2:**
+- `Configurations.title.2`
+- `Configurations.type.2`
+- `Configurations.id.2`
+- `Package Detail selection ( Configuration ).2`
+
+**ตัวอย่าง:** Package "นวดคอบ่าไหล่" มี 2 configurations:
+1. **ขนาดพื้นที่** (RADIO) - เลือก 1 จาก 5 ตัวเลือก
+2. **คำขอพิเศษ** (CHECKBOX) - เลือกได้หลายอย่าง
 
 ## 🛠️ ติดตั้งและรันในเครื่อง
 
