@@ -511,14 +511,19 @@ if uploaded_file is not None:
                         # Configurations
                         if pkg['configurations']:
                             for config in pkg['configurations']:
-                                mobile_html += f'<div style="margin: 10px 0;"><div style="color: #333; font-weight: 600; font-size: 13px; margin-bottom: 8px;">⚙️ {config["title"]}</div></div>'
+                                mobile_html += f'<div style="margin: 10px 0;"><div style="color: #333; font-weight: 600; font-size: 13px; margin-bottom: 8px;">{config["title"]}</div></div>'
                                 
-                                for item in config['data']['items'][:3]:
-                                    price_text = f"+฿{item['additional_price']}" if item['additional_price'] > 0 else ""
-                                    icon = "○" if config['type'] == "RADIO" else "☐"
-                                    item_value = item['value'][:30] + ('...' if len(item['value']) > 30 else '')
-                                    price_html = f'<div style="color: #667eea; font-weight: 600; font-size: 12px;">{price_text}</div>' if price_text else ''
-                                    mobile_html += f'<div style="background: white; border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 10px 12px; margin: 6px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px;"><div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 14px;">{icon}</span><span style="color: #333;">{item_value}</span></div>{price_html}</div>'
+                                # DATE_TIME_RANGE - show as date picker
+                                if config['type'] == "DATE_TIME_RANGE":
+                                    mobile_html += f'<div style="background: white; border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 12px 14px; margin: 6px 0; display: flex; justify-content: space-between; align-items: center; font-size: 14px;"><div style="display: flex; align-items: center; gap: 10px; color: #333;"><span style="font-size: 18px;">📅</span><span>วันที่เริ่มต้น</span></div><span style="color: #999; font-size: 13px;">21/11/2025</span></div>'
+                                # RADIO/CHECKBOX - show as list items
+                                else:
+                                    for item in config['data']['items'][:3]:
+                                        price_text = f"+฿{item['additional_price']:,}" if item['additional_price'] > 0 else ""
+                                        icon = "○" if config['type'] == "RADIO" else "☐"
+                                        item_value = item['value'][:30] + ('...' if len(item['value']) > 30 else '')
+                                        price_html = f'<div style="color: #667eea; font-weight: 600; font-size: 12px;">{price_text}</div>' if price_text else ''
+                                        mobile_html += f'<div style="background: white; border: 1.5px solid #e0e0e0; border-radius: 8px; padding: 10px 12px; margin: 6px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px;"><div style="display: flex; align-items: center; gap: 8px;"><span style="font-size: 14px;">{icon}</span><span style="color: #333;">{item_value}</span></div>{price_html}</div>'
                         
                         # Quantity & Order Button
                         quantity_label = pkg["quantity"]["placeholder"]["values"]["th"]
