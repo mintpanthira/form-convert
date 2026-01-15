@@ -432,13 +432,13 @@ if uploaded_file is not None:
                 col_left, col_mobile, col_right = st.columns([1, 2, 1])
                 
                 with col_mobile:
-                    # Show first 2 packages as demo
-                    demo_packages = category_json['packages'][:2]
+                    # Show all packages (scrollable)
+                    demo_packages = category_json['packages']
                     
                     # Build complete HTML
                     mobile_html = '<div style="max-width: 400px; margin: 0 auto; background: #1a1a1a; border-radius: 36px; padding: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">'
                     mobile_html += '<div style="background: white; border-radius: 28px 28px 0 0; padding: 12px 24px 8px 24px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;"><div style="font-weight: 600;">9:41</div><div style="display: flex; gap: 4px;"><span>📶</span><span>📡</span><span>🔋</span></div></div>'
-                    mobile_html += '<div style="background: #f5f5f5; height: 600px; overflow-y: auto; padding: 16px;">'
+                    mobile_html += '<div style="background: #f5f5f5; height: 700px; overflow-y: scroll; padding: 16px; -webkit-overflow-scrolling: touch;">'
                     
                     for idx, pkg in enumerate(demo_packages):
                         # Package Card
@@ -466,7 +466,7 @@ if uploaded_file is not None:
                     
                     # Close frame
                     mobile_html += '</div><div style="background: white; border-radius: 0 0 28px 28px; padding: 12px; display: flex; justify-content: center;"><div style="width: 140px; height: 4px; background: #ddd; border-radius: 2px;"></div></div></div>'
-                    mobile_html += f'<div style="text-align: center; margin-top: 16px; color: #666; font-size: 13px;">📱 แสดง {len(demo_packages)} จาก {len(category_json["packages"])} packages</div>'
+                    mobile_html += f'<div style="text-align: center; margin-top: 16px; color: #666; font-size: 13px;">📱 แสดงทั้งหมด {len(category_json["packages"])} packages (เลื่อนดูได้)</div>'
                     
                     # Render once
                     st.markdown(mobile_html, unsafe_allow_html=True)
