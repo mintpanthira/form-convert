@@ -203,22 +203,25 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
                 if pd.notna(config_text):
                     items = parse_configuration_text(config_text)
                 
-                # Create configuration
-                config = {
-                    "id": config_id,
-                    "data": {
-                        "items": items
-                    },
-                    "type": config_type,
-                    "title": config_title,
-                    "validation": {
-                        "required": config_type == "RADIO"
-                    },
-                    "description": None,
-                    "default_value": None
-                }
-                
-                current_package["configurations"].append(config)
+                # Create config if:
+                # 1. Has items (RADIO, CHECKBOX), OR
+                # 2. Is DATE_TIME_RANGE (doesn't need items)
+                if items or config_type == "DATE_TIME_RANGE":
+                    config = {
+                        "id": config_id,
+                        "data": {
+                            "items": items
+                        },
+                        "type": config_type,
+                        "title": config_title,
+                        "validation": {
+                            "required": config_type == "RADIO"
+                        },
+                        "description": None,
+                        "default_value": None
+                    }
+                    
+                    current_package["configurations"].append(config)
     
     # Don't forget to add the last package
     if current_package:
