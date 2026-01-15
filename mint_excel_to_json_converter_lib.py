@@ -45,21 +45,29 @@ def parse_configuration_text(config_text: str) -> List[Dict]:
     
     for line in lines:
         line = line.strip()
-        if not line or not line.startswith('-'):
+        if not line:
             continue
         
-        # Remove leading dash
-        line = line.lstrip('- ').strip()
+        # Remove leading dash if exists
+        if line.startswith('-'):
+            line = line.lstrip('- ').strip()
+        # If no dash but has content, still process it (for single-line configs)
+        elif not any(c in line for c in [':', '+', 'THB', 'ตร.ม', 'ชั่วโมง']):
+            # Skip lines that look like titles (no price/value indicators)
+            continue
         
-        # Extract price if exists (e.g., "+250 THB" or "+1,000 THB")
-        price_match = re.search(r'\+([\d,]+)\s*THB', line, re.IGNORECASE)
+        # Extract price if exists (e.g., "+250 THB", "+1,000 THB", or "+ 2,500")
+        price_match = re.search(r'\+\s*([\d,]+)(?:\s*THB)?', line, re.IGNORECASE)
         additional_price = 0
         if price_match:
             # Remove comma from price string
             price_str = price_match.group(1).replace(',', '')
             additional_price = int(price_str)
-            # Remove price from value text
-            line = re.sub(r'\+[\d,]+\s*THB', '', line, flags=re.IGNORECASE).strip()
+            # Remove price from value text (handle both "THB" and non-"THB" formats)
+            line = re.sub(r'\+\s*[\d,]+(?:\s*THB)?', '', line, flags=re.IGNORECASE).strip()
+        
+        # Clean up trailing colons and extra whitespace
+        line = re.sub(r':\s*$', '', line).strip()
         
         items.append({
             "id": str(item_id),
