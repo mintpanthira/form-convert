@@ -152,13 +152,36 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
         
         # Process configurations
         config_type = str(row.get('Configurations.type', 'NONE')).strip().upper()
+        config_text = row.get('Package Detail selection ( Configuration )')
+        config_title = str(row.get('Configurations.title', 'ตัวเลือก'))
+        config_id = row.get('Configurations.id', 'config-001')
+        
+        # Check for special-request
+        is_special_request = False
+        if pd.notna(config_title):
+            config_title_lower = config_title.lower()
+            if 'special-request' in config_title_lower or 'คำขอพิเศษ' in config_title_lower or 'special request' in config_title_lower:
+                is_special_request = True
+                config_type = 'CHECKBOX'
         
         if config_type not in ['NONE', 'NAN'] and config_type:
-            config_text = row.get('Package Detail selection ( Configuration )')
-            config_title = row.get('Configurations.title', 'ตัวเลือก')
-            config_id = row.get('Configurations.id', 'config-001')
-            
-            if pd.notna(config_text):
+            # For special-request, create empty items for text input
+            if is_special_request:
+                config = {
+                    "id": str(config_id) if pd.notna(config_id) else "special-request",
+                    "data": {
+                        "items": []  # Empty for text input
+                    },
+                    "type": "CHECKBOX",
+                    "title": config_title,
+                    "validation": {
+                        "required": False
+                    },
+                    "description": None,
+                    "default_value": None
+                }
+                package["configurations"].append(config)
+            elif pd.notna(config_text):
                 items = parse_configuration_text(config_text)
                 
                 if items:  # Only add if there are items
@@ -168,7 +191,7 @@ def convert_mint_excel_to_json(df: pd.DataFrame, service_id: str = None,
                             "items": items
                         },
                         "type": config_type,
-                        "title": str(config_title) if pd.notna(config_title) else "ตัวเลือก",
+                        "title": config_title,
                         "validation": {
                             "required": config_type == "RADIO"  # RADIO usually required
                         },
