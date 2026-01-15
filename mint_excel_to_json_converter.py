@@ -317,15 +317,19 @@ def split_by_category(df):
 st.markdown("## 📤 Step 1: Upload Excel File")
 
 uploaded_file = st.file_uploader(
-    "เลือกไฟล์ Excel (รูปแบบ Mint)",
-    type=['xlsx', 'xls'],
-    help="อัปโหลดไฟล์ Excel ที่มีโครงสร้างแบบ Mint test form"
+    "เลือกไฟล์ Excel หรือ CSV (รูปแบบ Mint)",
+    type=['xlsx', 'xls', 'csv'],
+    help="อัปโหลดไฟล์ Excel หรือ CSV ที่มีโครงสร้างแบบ Mint test form"
 )
 
 if uploaded_file is not None:
     try:
-        # Read Excel
-        df = pd.read_excel(uploaded_file)
+        # Read file (Excel or CSV)
+        file_extension = uploaded_file.name.split('.')[-1].lower()
+        if file_extension == 'csv':
+            df = pd.read_csv(uploaded_file)
+        else:
+            df = pd.read_excel(uploaded_file)
         
         st.success(f"✅ อ่านไฟล์สำเร็จ! ({df.shape[0]} แถว, {df.shape[1]} คอลัมน์)")
         
