@@ -11,6 +11,13 @@ Flow:
 import streamlit as st
 import pandas as pd
 import json
+
+# Force cache invalidation - v2.1 - 2026-01-15 17:30
+import importlib
+import sys
+if 'mint_excel_to_json_converter_lib' in sys.modules:
+    importlib.reload(sys.modules['mint_excel_to_json_converter_lib'])
+
 from mint_excel_to_json_converter_lib import (
     convert_mint_excel_to_json,
     create_inline_text,

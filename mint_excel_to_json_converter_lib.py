@@ -1,3 +1,9 @@
+"""
+Mint Excel to JSON Converter Library
+Version: 2.1.0 - Multi-configuration support
+Updated: 2026-01-15 17:30
+"""
+
 import streamlit as st
 import pandas as pd
 import json
